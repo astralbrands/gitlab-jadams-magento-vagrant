@@ -9,10 +9,11 @@ git clone git:AstralBrands/magento.git local
 git clone git:AstralBrands/magento-1-media.git media
 git clone git:AstralBrands/magento-1-developers-db.git db
 cd db
-unzip localdb.zip
-sed -i -e "s/\`production\`@\`%/\`local\`@\`localhost/g" localdb.sql
+unzip local.zip
+sed -i -e "s/\`production\`@\`%/\`local\`@\`localhost/g" local.sql
 cd ../
 cp /home/vagrant/deployment/localdb.zip .
+unzip localdb.zip
 echo "Copying local.xml"
 cp /home/vagrant/deployment/configs/local.xml /home/vagrant/vhosts/local/app/etc/
 echo "Making log folders"
