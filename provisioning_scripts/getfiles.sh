@@ -1,4 +1,5 @@
 #!/bin/bash
+export LANG=C
 echo "Get files"
 USER=`cat  /home/vagrant/deployment/.ssh/user`
 ssh-keyscan -H 18.210.135.95 >> ~/.ssh/known_hosts
@@ -9,11 +10,12 @@ git clone git:AstralBrands/magento.git local
 git clone git:AstralBrands/magento-1-media.git media
 git clone git:AstralBrands/magento-1-developers-db.git db
 cd db
-unzip local.zip
+unzip localdb.zip
+mv localdb.sql local.sql
 sed -i -e "s/\`production\`@\`%/\`local\`@\`localhost/g" local.sql
+sed -i -e "s/admin.purcosmetics.com/local.purcosmetics.com/g" local.sql
 cd ../
 cp /home/vagrant/deployment/localdb.zip .
-unzip localdb.zip
 echo "Copying local.xml"
 cp /home/vagrant/deployment/configs/local.xml /home/vagrant/vhosts/local/app/etc/
 echo "Making log folders"
